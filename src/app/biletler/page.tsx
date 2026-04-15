@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { AppIcon } from "~/components/app-icon";
+import { MainNavLinks } from "~/components/main-nav-links";
 import { PurchaseForm } from "~/components/purchase-form";
 import { UserMenu } from "~/components/user-menu";
 import { auth } from "~/server/auth";
@@ -55,35 +56,10 @@ export default async function BiletlerPage(props: {
       <nav className="fixed top-0 z-50 w-full bg-slate-950/70 shadow-[0_0_20px_rgba(131,174,255,0.1)] backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <span className="bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text font-['Space_Grotesk',sans-serif] text-2xl font-bold tracking-tight text-transparent">
-            BAKIRCAY VIBE
+            BAKIRCAY X KATIP CELEBI
           </span>
-          <div className="hidden items-center gap-8 font-['Space_Grotesk',sans-serif] tracking-tight md:flex">
-            <Link
-              className="font-medium text-slate-400 transition-colors hover:text-blue-300"
-              href="/"
-            >
-              Events
-            </Link>
-            <Link
-              href="/satin-alimlarim"
-              className="border-b-2 border-blue-400 pb-1 text-blue-400 transition-colors hover:text-blue-300"
-            >
-              My Tickets
-            </Link>
-            <Link
-              className="font-medium text-slate-400 transition-colors hover:text-blue-300"
-              href="/"
-            >
-              Community
-            </Link>
-          </div>
+          <MainNavLinks className="hidden items-center gap-8 font-['Space_Grotesk',sans-serif] tracking-tight md:flex" />
           <div className="flex items-center gap-4 text-slate-400">
-            <button
-              aria-label="Notifications"
-              className="scale-95 p-2 transition-colors hover:text-blue-300 active:duration-100"
-            >
-              <AppIcon name="notifications" className="h-5 w-5" />
-            </button>
             <UserMenu name={session.user.name} image={session.user.image} />
           </div>
         </div>
@@ -96,7 +72,7 @@ export default async function BiletlerPage(props: {
         >
           <AppIcon name="arrow_back" className="h-4 w-4" />
           <span className="text-[10px] font-bold tracking-widest uppercase">
-            Return to Event Gallery
+            Etkinliklere Don
           </span>
         </Link>
 
@@ -104,13 +80,14 @@ export default async function BiletlerPage(props: {
           <div className="space-y-8 lg:col-span-7">
             <header className="space-y-2">
               <h1 className="font-['Space_Grotesk',sans-serif] text-5xl leading-none font-bold tracking-tight text-[#f0f0fd] md:text-6xl">
-                WHATSAPP
+                Y2K
                 <br />
-                <span className="text-[#83aeff] italic">IBAN ODEME</span>
+                <span className="text-[#83aeff] italic">BILET AKISI</span>
               </h1>
               <p className="max-w-md font-['Plus_Jakarta_Sans',sans-serif] text-[#aaaab7]">
                 {selectedEvent.title} icin odeme sureci yalnizca WhatsApp
-                uzerinden IBAN transferi ile tamamlanir.
+                uzerinden IBAN transferi ile tamamlanir. Etkinlik Bakircay ve
+                Katip Celebi ogrencilerinin katilimina aciktir.
               </p>
             </header>
 
@@ -128,6 +105,10 @@ export default async function BiletlerPage(props: {
                 <li className="rounded-lg bg-black/25 px-4 py-3">
                   3. Havale/EFT sonrasinda odemen manuel onaylanir ve biletlerin
                   aktif olur.
+                </li>
+                <li className="rounded-lg bg-black/25 px-4 py-3">
+                  4. Tema: 2000&apos;ler. Dress-code ve detaylar etkinlik
+                  aciklamasinda.
                 </li>
               </ol>
             </section>
@@ -164,7 +145,7 @@ export default async function BiletlerPage(props: {
                   <div className="mb-1 flex items-center gap-2">
                     <span className="h-2 w-2 animate-pulse rounded-full bg-[#00fdc6]" />
                     <span className="text-[10px] font-bold tracking-widest text-[#00fdc6] uppercase">
-                      Upcoming Vibe
+                      2000&apos;ler Gecesi
                     </span>
                   </div>
                   <h3 className="font-['Space_Grotesk',sans-serif] text-2xl leading-tight font-bold uppercase">
@@ -238,16 +219,16 @@ export default async function BiletlerPage(props: {
         >
           <AppIcon name="local_activity" className="h-5 w-5" />
           <span className="mt-1 text-[10px] font-bold tracking-widest uppercase">
-            Feed
+            Etkinlik
           </span>
         </Link>
         <Link
-          href="/"
+          href="/explore"
           className="flex flex-col items-center justify-center px-6 py-2 text-slate-500 transition-transform duration-150 active:scale-90"
         >
           <AppIcon name="search" className="h-5 w-5" />
           <span className="mt-1 text-[10px] font-bold tracking-widest uppercase">
-            Search
+            Kesfet
           </span>
         </Link>
         <Link
@@ -256,7 +237,7 @@ export default async function BiletlerPage(props: {
         >
           <AppIcon name="confirmation_number" className="h-5 w-5" />
           <span className="mt-1 text-[10px] font-bold tracking-widest uppercase">
-            Tickets
+            Biletlerim
           </span>
         </Link>
         <Link
@@ -265,7 +246,7 @@ export default async function BiletlerPage(props: {
         >
           <AppIcon name="account_circle" className="h-5 w-5" />
           <span className="mt-1 text-[10px] font-bold tracking-widest uppercase">
-            Profile
+            Profil
           </span>
         </Link>
       </nav>

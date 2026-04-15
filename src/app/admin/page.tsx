@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
+import { AdminTicketScanner } from "~/components/admin-ticket-scanner";
 import { AppIcon } from "../../components/app-icon";
 import { auth } from "../../server/auth";
 import { db } from "../../server/db";
@@ -109,7 +110,8 @@ export default async function AdminPage(props: {
   const activeTab =
     params?.tab === "users" ||
     params?.tab === "tickets" ||
-    params?.tab === "events"
+    params?.tab === "events" ||
+    params?.tab === "scanner"
       ? params.tab
       : "events";
 
@@ -357,6 +359,22 @@ export default async function AdminPage(props: {
     (sum: number, purchase: PurchaseRecord) => sum + purchase.totalKurus,
     0,
   );
+  const allTickets = purchases.flatMap((purchase: PurchaseRecord) =>
+    purchase.tickets.map((ticket: TicketRecord) => ({
+      ...ticket,
+      buyerPhone: purchase.buyerPhone,
+      userName: purchase.user.name,
+      userPhone: purchase.user.phone,
+    })),
+  );
+  const checkedInTickets = allTickets.filter((ticket) => !!ticket.checkedInAt);
+  const recentCheckedInTickets = [...checkedInTickets]
+    .sort((a, b) => {
+      const left = a.checkedInAt ? new Date(a.checkedInAt).getTime() : 0;
+      const right = b.checkedInAt ? new Date(b.checkedInAt).getTime() : 0;
+      return right - left;
+    })
+    .slice(0, 12);
 
   const eventFormLabel = editingEvent
     ? "Etkinlik güncelle"
@@ -446,6 +464,22 @@ export default async function AdminPage(props: {
               </span>
               <span className="text-xs text-[#737580]">{users.length}</span>
             </Link>
+            <Link
+              href="/admin?tab=scanner"
+              className={`flex items-center justify-between rounded-xl px-4 py-3 transition-colors ${
+                activeTab === "scanner"
+                  ? "bg-[#83aeff]/15 text-[#dbe7ff]"
+                  : "text-[#aaaab7] hover:bg-white/5 hover:text-[#f0f0fd]"
+              }`}
+            >
+              <span className="flex items-center gap-3">
+                <AppIcon name="search" className="h-4 w-4" />
+                Kod Tarama
+              </span>
+              <span className="text-xs text-[#737580]">
+                {checkedInTickets.length}
+              </span>
+            </Link>
           </nav>
 
           <div className="mt-4 grid grid-cols-1 gap-3">
@@ -463,6 +497,14 @@ export default async function AdminPage(props: {
               </p>
               <p className="mt-1 font-['Space_Grotesk',sans-serif] text-2xl font-bold text-[#83aeff]">
                 {formatPrice(pendingRevenue)}
+              </p>
+            </div>
+            <div className="rounded-xl border border-[#464752]/15 bg-[#0c0e17] p-4">
+              <p className="text-xs tracking-wider text-[#aaaab7] uppercase">
+                Yoklama (Gelen)
+              </p>
+              <p className="mt-1 font-['Space_Grotesk',sans-serif] text-2xl font-bold text-[#00fdc6]">
+                {checkedInTickets.length}
               </p>
             </div>
           </div>
@@ -765,6 +807,14 @@ export default async function AdminPage(props: {
                     {formatPrice(pendingRevenue)}
                   </p>
                 </div>
+                <div className="rounded-xl border border-[#464752]/15 bg-[#11131d] p-4">
+                  <p className="text-xs tracking-wider text-[#aaaab7] uppercase">
+                    Giriş Yapan
+                  </p>
+                  <p className="mt-1 font-['Space_Grotesk',sans-serif] text-3xl font-bold text-[#00fdc6]">
+                    {checkedInTickets.length}
+                  </p>
+                </div>
               </div>
 
               <section className="space-y-4">
@@ -816,12 +866,25 @@ export default async function AdminPage(props: {
                         </div>
                         <div className="space-y-2">
                           {purchase.tickets.map((ticket: TicketRecord) => (
-                            <p
+                            <div
                               key={ticket.id}
-                              className="rounded-md border border-[#464752]/20 bg-[#11131d] px-3 py-2 font-mono text-xs text-[#d3d8e8]"
+                              className="rounded-md border border-[#464752]/20 bg-[#11131d] px-3 py-2"
                             >
-                              {ticket.ticketNumber} • {ticket.status}
-                            </p>
+                              <p className="font-mono text-xs text-[#d3d8e8]">
+                                {ticket.ticketNumber} • {ticket.status}
+                              </p>
+                              <p
+                                className={`mt-1 text-[11px] font-semibold ${
+                                  ticket.checkedInAt
+                                    ? "text-[#00fdc6]"
+                                    : "text-[#aaaab7]"
+                                }`}
+                              >
+                                {ticket.checkedInAt
+                                  ? `Giriş yaptı: ${formatDate(ticket.checkedInAt)}`
+                                  : "Henüz giriş yapmadı"}
+                              </p>
+                            </div>
                           ))}
                         </div>
                       </div>
@@ -951,6 +1014,64 @@ export default async function AdminPage(props: {
                     </form>
                   </article>
                 ))}
+              </section>
+            </>
+          ) : null}
+
+          {activeTab === "scanner" ? (
+            <>
+              <header className="glass-card rounded-2xl border border-[#464752]/15 p-6">
+                <p className="text-xs font-bold tracking-widest text-[#83aeff] uppercase">
+                  QR Tarama ve Yoklama
+                </p>
+                <h1 className="mt-2 font-['Space_Grotesk',sans-serif] text-4xl font-bold tracking-tight md:text-5xl">
+                  Giriş doğrulama merkezi
+                </h1>
+                <p className="mt-2 text-sm text-[#aaaab7]">
+                  Kapıda QR tarat, kullanıcıyı anında doğrula ve yoklamayı
+                  işaretle.
+                </p>
+              </header>
+
+              <AdminTicketScanner />
+
+              <section className="rounded-2xl border border-[#464752]/15 bg-[#11131d] p-5">
+                <div className="mb-4 flex items-center justify-between">
+                  <h2 className="font-['Space_Grotesk',sans-serif] text-2xl font-bold text-[#f0f0fd]">
+                    Son giriş yapanlar
+                  </h2>
+                  <span className="rounded-full border border-[#00fdc6]/30 bg-[#00fdc6]/10 px-3 py-1 text-xs font-bold text-[#00fdc6]">
+                    {checkedInTickets.length} toplam
+                  </span>
+                </div>
+
+                {recentCheckedInTickets.length === 0 ? (
+                  <p className="text-sm text-[#aaaab7]">
+                    Henüz giriş doğrulaması yapılmadı.
+                  </p>
+                ) : (
+                  <div className="space-y-2">
+                    {recentCheckedInTickets.map((ticket) => (
+                      <article
+                        key={ticket.id}
+                        className="rounded-lg border border-[#464752]/20 bg-[#0c0e17] px-4 py-3"
+                      >
+                        <p className="font-mono text-xs font-bold text-[#d3d8e8]">
+                          {ticket.ticketNumber}
+                        </p>
+                        <p className="mt-1 text-xs text-[#aaaab7]">
+                          {ticket.userName ?? "İsimsiz kullanıcı"} •{" "}
+                          {ticket.userPhone ?? ticket.buyerPhone}
+                        </p>
+                        <p className="mt-1 text-xs font-semibold text-[#00fdc6]">
+                          {ticket.checkedInAt
+                            ? formatDate(ticket.checkedInAt)
+                            : "Giriş zamanı yok"}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+                )}
               </section>
             </>
           ) : null}

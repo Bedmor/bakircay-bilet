@@ -200,7 +200,9 @@ exports.Prisma.TicketScalarFieldEnum = {
   userId: 'userId',
   purchaseId: 'purchaseId',
   createdAt: 'createdAt',
-  approvedAt: 'approvedAt'
+  approvedAt: 'approvedAt',
+  checkedInAt: 'checkedInAt',
+  checkedInBy: 'checkedInBy'
 };
 
 exports.Prisma.EventScalarFieldEnum = {

@@ -9538,6 +9538,8 @@ export namespace Prisma {
     purchaseId: string | null
     createdAt: Date | null
     approvedAt: Date | null
+    checkedInAt: Date | null
+    checkedInBy: string | null
   }
 
   export type TicketMaxAggregateOutputType = {
@@ -9548,6 +9550,8 @@ export namespace Prisma {
     purchaseId: string | null
     createdAt: Date | null
     approvedAt: Date | null
+    checkedInAt: Date | null
+    checkedInBy: string | null
   }
 
   export type TicketCountAggregateOutputType = {
@@ -9558,6 +9562,8 @@ export namespace Prisma {
     purchaseId: number
     createdAt: number
     approvedAt: number
+    checkedInAt: number
+    checkedInBy: number
     _all: number
   }
 
@@ -9570,6 +9576,8 @@ export namespace Prisma {
     purchaseId?: true
     createdAt?: true
     approvedAt?: true
+    checkedInAt?: true
+    checkedInBy?: true
   }
 
   export type TicketMaxAggregateInputType = {
@@ -9580,6 +9588,8 @@ export namespace Prisma {
     purchaseId?: true
     createdAt?: true
     approvedAt?: true
+    checkedInAt?: true
+    checkedInBy?: true
   }
 
   export type TicketCountAggregateInputType = {
@@ -9590,6 +9600,8 @@ export namespace Prisma {
     purchaseId?: true
     createdAt?: true
     approvedAt?: true
+    checkedInAt?: true
+    checkedInBy?: true
     _all?: true
   }
 
@@ -9673,6 +9685,8 @@ export namespace Prisma {
     purchaseId: string
     createdAt: Date
     approvedAt: Date | null
+    checkedInAt: Date | null
+    checkedInBy: string | null
     _count: TicketCountAggregateOutputType | null
     _min: TicketMinAggregateOutputType | null
     _max: TicketMaxAggregateOutputType | null
@@ -9700,6 +9714,8 @@ export namespace Prisma {
     purchaseId?: boolean
     createdAt?: boolean
     approvedAt?: boolean
+    checkedInAt?: boolean
+    checkedInBy?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     purchase?: boolean | PurchaseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ticket"]>
@@ -9712,6 +9728,8 @@ export namespace Prisma {
     purchaseId?: boolean
     createdAt?: boolean
     approvedAt?: boolean
+    checkedInAt?: boolean
+    checkedInBy?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     purchase?: boolean | PurchaseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ticket"]>
@@ -9724,6 +9742,8 @@ export namespace Prisma {
     purchaseId?: boolean
     createdAt?: boolean
     approvedAt?: boolean
+    checkedInAt?: boolean
+    checkedInBy?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     purchase?: boolean | PurchaseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ticket"]>
@@ -9736,9 +9756,11 @@ export namespace Prisma {
     purchaseId?: boolean
     createdAt?: boolean
     approvedAt?: boolean
+    checkedInAt?: boolean
+    checkedInBy?: boolean
   }
 
-  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ticketNumber" | "status" | "userId" | "purchaseId" | "createdAt" | "approvedAt", ExtArgs["result"]["ticket"]>
+  export type TicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ticketNumber" | "status" | "userId" | "purchaseId" | "createdAt" | "approvedAt" | "checkedInAt" | "checkedInBy", ExtArgs["result"]["ticket"]>
   export type TicketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     purchase?: boolean | PurchaseDefaultArgs<ExtArgs>
@@ -9766,6 +9788,8 @@ export namespace Prisma {
       purchaseId: string
       createdAt: Date
       approvedAt: Date | null
+      checkedInAt: Date | null
+      checkedInBy: string | null
     }, ExtArgs["result"]["ticket"]>
     composites: {}
   }
@@ -10198,6 +10222,8 @@ export namespace Prisma {
     readonly purchaseId: FieldRef<"Ticket", 'String'>
     readonly createdAt: FieldRef<"Ticket", 'DateTime'>
     readonly approvedAt: FieldRef<"Ticket", 'DateTime'>
+    readonly checkedInAt: FieldRef<"Ticket", 'DateTime'>
+    readonly checkedInBy: FieldRef<"Ticket", 'String'>
   }
     
 
@@ -11859,7 +11885,9 @@ export namespace Prisma {
     userId: 'userId',
     purchaseId: 'purchaseId',
     createdAt: 'createdAt',
-    approvedAt: 'approvedAt'
+    approvedAt: 'approvedAt',
+    checkedInAt: 'checkedInAt',
+    checkedInBy: 'checkedInBy'
   };
 
   export type TicketScalarFieldEnum = (typeof TicketScalarFieldEnum)[keyof typeof TicketScalarFieldEnum]
@@ -12516,6 +12544,8 @@ export namespace Prisma {
     purchaseId?: StringFilter<"Ticket"> | string
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     approvedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    checkedInAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    checkedInBy?: StringNullableFilter<"Ticket"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     purchase?: XOR<PurchaseScalarRelationFilter, PurchaseWhereInput>
   }
@@ -12528,6 +12558,8 @@ export namespace Prisma {
     purchaseId?: SortOrder
     createdAt?: SortOrder
     approvedAt?: SortOrderInput | SortOrder
+    checkedInAt?: SortOrderInput | SortOrder
+    checkedInBy?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     purchase?: PurchaseOrderByWithRelationInput
   }
@@ -12543,6 +12575,8 @@ export namespace Prisma {
     purchaseId?: StringFilter<"Ticket"> | string
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     approvedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    checkedInAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    checkedInBy?: StringNullableFilter<"Ticket"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     purchase?: XOR<PurchaseScalarRelationFilter, PurchaseWhereInput>
   }, "id" | "ticketNumber">
@@ -12555,6 +12589,8 @@ export namespace Prisma {
     purchaseId?: SortOrder
     createdAt?: SortOrder
     approvedAt?: SortOrderInput | SortOrder
+    checkedInAt?: SortOrderInput | SortOrder
+    checkedInBy?: SortOrderInput | SortOrder
     _count?: TicketCountOrderByAggregateInput
     _max?: TicketMaxOrderByAggregateInput
     _min?: TicketMinOrderByAggregateInput
@@ -12571,6 +12607,8 @@ export namespace Prisma {
     purchaseId?: StringWithAggregatesFilter<"Ticket"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Ticket"> | Date | string
     approvedAt?: DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
+    checkedInAt?: DateTimeNullableWithAggregatesFilter<"Ticket"> | Date | string | null
+    checkedInBy?: StringNullableWithAggregatesFilter<"Ticket"> | string | null
   }
 
   export type EventWhereInput = {
@@ -13194,6 +13232,8 @@ export namespace Prisma {
     status?: $Enums.TicketStatus
     createdAt?: Date | string
     approvedAt?: Date | string | null
+    checkedInAt?: Date | string | null
+    checkedInBy?: string | null
     user: UserCreateNestedOneWithoutTicketsInput
     purchase: PurchaseCreateNestedOneWithoutTicketsInput
   }
@@ -13206,6 +13246,8 @@ export namespace Prisma {
     purchaseId: string
     createdAt?: Date | string
     approvedAt?: Date | string | null
+    checkedInAt?: Date | string | null
+    checkedInBy?: string | null
   }
 
   export type TicketUpdateInput = {
@@ -13214,6 +13256,8 @@ export namespace Prisma {
     status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInBy?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutTicketsNestedInput
     purchase?: PurchaseUpdateOneRequiredWithoutTicketsNestedInput
   }
@@ -13226,6 +13270,8 @@ export namespace Prisma {
     purchaseId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TicketCreateManyInput = {
@@ -13236,6 +13282,8 @@ export namespace Prisma {
     purchaseId: string
     createdAt?: Date | string
     approvedAt?: Date | string | null
+    checkedInAt?: Date | string | null
+    checkedInBy?: string | null
   }
 
   export type TicketUpdateManyMutationInput = {
@@ -13244,6 +13292,8 @@ export namespace Prisma {
     status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TicketUncheckedUpdateManyInput = {
@@ -13254,6 +13304,8 @@ export namespace Prisma {
     purchaseId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type EventCreateInput = {
@@ -13916,6 +13968,8 @@ export namespace Prisma {
     purchaseId?: SortOrder
     createdAt?: SortOrder
     approvedAt?: SortOrder
+    checkedInAt?: SortOrder
+    checkedInBy?: SortOrder
   }
 
   export type TicketMaxOrderByAggregateInput = {
@@ -13926,6 +13980,8 @@ export namespace Prisma {
     purchaseId?: SortOrder
     createdAt?: SortOrder
     approvedAt?: SortOrder
+    checkedInAt?: SortOrder
+    checkedInBy?: SortOrder
   }
 
   export type TicketMinOrderByAggregateInput = {
@@ -13936,6 +13992,8 @@ export namespace Prisma {
     purchaseId?: SortOrder
     createdAt?: SortOrder
     approvedAt?: SortOrder
+    checkedInAt?: SortOrder
+    checkedInBy?: SortOrder
   }
 
   export type EnumTicketStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -15000,6 +15058,8 @@ export namespace Prisma {
     status?: $Enums.TicketStatus
     createdAt?: Date | string
     approvedAt?: Date | string | null
+    checkedInAt?: Date | string | null
+    checkedInBy?: string | null
     purchase: PurchaseCreateNestedOneWithoutTicketsInput
   }
 
@@ -15010,6 +15070,8 @@ export namespace Prisma {
     purchaseId: string
     createdAt?: Date | string
     approvedAt?: Date | string | null
+    checkedInAt?: Date | string | null
+    checkedInBy?: string | null
   }
 
   export type TicketCreateOrConnectWithoutUserInput = {
@@ -15171,6 +15233,8 @@ export namespace Prisma {
     purchaseId?: StringFilter<"Ticket"> | string
     createdAt?: DateTimeFilter<"Ticket"> | Date | string
     approvedAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    checkedInAt?: DateTimeNullableFilter<"Ticket"> | Date | string | null
+    checkedInBy?: StringNullableFilter<"Ticket"> | string | null
   }
 
   export type UserCreateWithoutPurchasesInput = {
@@ -15212,6 +15276,8 @@ export namespace Prisma {
     status?: $Enums.TicketStatus
     createdAt?: Date | string
     approvedAt?: Date | string | null
+    checkedInAt?: Date | string | null
+    checkedInBy?: string | null
     user: UserCreateNestedOneWithoutTicketsInput
   }
 
@@ -15222,6 +15288,8 @@ export namespace Prisma {
     userId: string
     createdAt?: Date | string
     approvedAt?: Date | string | null
+    checkedInAt?: Date | string | null
+    checkedInBy?: string | null
   }
 
   export type TicketCreateOrConnectWithoutPurchaseInput = {
@@ -15486,6 +15554,8 @@ export namespace Prisma {
     purchaseId: string
     createdAt?: Date | string
     approvedAt?: Date | string | null
+    checkedInAt?: Date | string | null
+    checkedInBy?: string | null
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -15621,6 +15691,8 @@ export namespace Prisma {
     status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInBy?: NullableStringFieldUpdateOperationsInput | string | null
     purchase?: PurchaseUpdateOneRequiredWithoutTicketsNestedInput
   }
 
@@ -15631,6 +15703,8 @@ export namespace Prisma {
     purchaseId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TicketUncheckedUpdateManyWithoutUserInput = {
@@ -15640,6 +15714,8 @@ export namespace Prisma {
     purchaseId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TicketCreateManyPurchaseInput = {
@@ -15649,6 +15725,8 @@ export namespace Prisma {
     userId: string
     createdAt?: Date | string
     approvedAt?: Date | string | null
+    checkedInAt?: Date | string | null
+    checkedInBy?: string | null
   }
 
   export type TicketUpdateWithoutPurchaseInput = {
@@ -15657,6 +15735,8 @@ export namespace Prisma {
     status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInBy?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutTicketsNestedInput
   }
 
@@ -15667,6 +15747,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TicketUncheckedUpdateManyWithoutPurchaseInput = {
@@ -15676,6 +15758,8 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    checkedInBy?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

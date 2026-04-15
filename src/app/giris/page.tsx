@@ -42,7 +42,7 @@ export default function GirisPage() {
             href="/"
             className="bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent"
           >
-            BAKIRCAY VIBE
+            BAKIRCAY X KATIP CELEBI
           </Link>
           <Link
             href="/"
@@ -57,21 +57,22 @@ export default function GirisPage() {
       <div className="mx-auto grid min-h-screen w-full max-w-6xl items-center gap-10 px-6 pt-24 pb-10 md:grid-cols-2">
         <section className="space-y-6">
           <span className="inline-block rounded-full border border-[#00fdc6]/20 bg-[#00fdc6]/10 px-3 py-1 font-['Plus_Jakarta_Sans',sans-serif] text-xs font-bold tracking-wider text-[#00fdc6]">
-            PASSWORDLESS ACCESS
+            2000&apos;LER CAMPUS PASS
           </span>
           <h1 className="font-['Space_Grotesk',sans-serif] text-5xl leading-[0.95] font-bold tracking-tight md:text-6xl">
             MAGIC LINK ILE
             <br />
-            <span className="text-[#83aeff] italic">GUVENLI GIRIS</span>
+            <span className="text-[#83aeff] italic">Y2K GECESINE GIRIS</span>
           </h1>
           <p className="max-w-md font-['Plus_Jakarta_Sans',sans-serif] text-[#aaaab7]">
             Sifresiz giris icin sadece e-posta adresini yaz. Linke tikladiginda
-            hesabina otomatik giris yaparsin.
+            hesabina otomatik giris yaparsin. Bakircay ve Katip Celebi
+            ogrencileri ayni etkinlik akisinda bulusuyor.
           </p>
           <div className="relative h-56 overflow-hidden rounded-2xl border border-[#464752]/20 bg-[#11131d]">
             <Image
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8DrdrUoFQNzSAeM2SW4fyuMqRjSBfIWw9Mo4-mFuYjDVSk_c41nSWI6Iw1xt7Z8dkh343t2215Aqhkxk226wlkF7IJKHQdksYPf1mM1dBaCfSrrlhXn_Zqluwe__3_Y7s3tMnRPYw0R-L6anmiqVLsF8PnbvWGCnRapZMm6JRLgnnXEcQMBayMeNWlgFiIGnyT9RrGKBv8SqYGLQZerDQh3XpJLGrZeuBOq0fsKJepOhhuIkt8T-n6KxwjRXw_bJPqhOcMxEEeX91"
-              alt="Bakircay Vibe login"
+              alt="Bakircay ve Katip Celebi 2000'ler giris"
               fill
               sizes="(max-width: 768px) 100vw, 45vw"
               className="h-full w-full object-cover opacity-70"

@@ -8,6 +8,10 @@ import "./src/env.js";
 const config = {
 	images: {
 		remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "pub-3ebdbff355344556ba1157c3cd3e5d3f.r2.dev",
+            },
 			{
 				protocol: "https",
 				hostname: "lh3.googleusercontent.com",

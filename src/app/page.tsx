@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { AppIcon } from "~/components/app-icon";
+import { MainNavLinks } from "~/components/main-nav-links";
 import { UserMenu } from "~/components/user-menu";
 import { auth } from "~/server/auth";
 import { getEvents } from "~/server/lib/events";
@@ -29,35 +30,10 @@ export default async function HomePage() {
       <nav className="fixed top-0 z-50 w-full bg-slate-950/70 shadow-[0_0_20px_rgba(131,174,255,0.1)] backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 font-['Space_Grotesk',sans-serif] tracking-tight">
           <div className="bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-2xl font-bold text-transparent">
-            BAKIRCAY VIBE
+            BAKIRCAY X KATIP CELEBI
           </div>
-          <div className="hidden items-center gap-8 md:flex">
-            <Link
-              className="border-b-2 border-blue-400 pb-1 text-blue-400 transition-colors hover:text-blue-300"
-              href="/"
-            >
-              Events
-            </Link>
-            <Link
-              className="font-medium text-slate-400 transition-colors hover:text-blue-300"
-              href="/satin-alimlarim"
-            >
-              My Tickets
-            </Link>
-            <Link
-              className="font-medium text-slate-400 transition-colors hover:text-blue-300"
-              href="/"
-            >
-              Community
-            </Link>
-          </div>
+          <MainNavLinks className="hidden items-center gap-8 md:flex" />
           <div className="flex items-center gap-4">
-            <button
-              aria-label="Notifications"
-              className="scale-95 text-slate-400 transition-colors hover:text-blue-300 active:duration-100"
-            >
-              <AppIcon name="notifications" className="h-5 w-5" />
-            </button>
             {session?.user ? (
               <UserMenu name={session.user.name} image={session.user.image} />
             ) : (
@@ -76,9 +52,11 @@ export default async function HomePage() {
       <div className="flex min-h-screen pt-20">
         <aside className="sticky top-20 hidden h-[calc(100vh-5rem)] w-64 flex-col gap-4 border-r border-slate-800/50 bg-slate-900 p-4 font-['Plus_Jakarta_Sans',sans-serif] md:flex">
           <div className="mb-6 px-2">
-            <h2 className="text-xl font-black text-blue-400">Welcome Back</h2>
+            <h2 className="text-xl font-black text-blue-400">
+              Yeniden Hos Geldin
+            </h2>
             <p className="text-sm font-normal text-slate-500">
-              Ready for the night?
+              2000&apos;ler gecesine hazir misin?
             </p>
           </div>
           <nav className="flex flex-col gap-2">
@@ -91,45 +69,26 @@ export default async function HomePage() {
             </Link>
             <Link
               className="flex items-center gap-3 px-4 py-3 text-slate-500 transition-all hover:bg-slate-800 hover:text-white"
-              href="/"
+              href="/explore"
             >
               <AppIcon name="explore" className="h-4 w-4" />
-              <span>Explore</span>
+              <span>Kesfet</span>
             </Link>
             <Link
               className="flex items-center gap-3 px-4 py-3 text-slate-500 transition-all hover:bg-slate-800 hover:text-white"
-              href="/"
+              href="/calendar"
             >
               <AppIcon name="calendar_month" className="h-4 w-4" />
-              <span>Calendar</span>
+              <span>Takvim</span>
             </Link>
             <Link
               className="flex items-center gap-3 px-4 py-3 text-slate-500 transition-all hover:bg-slate-800 hover:text-white"
               href="/satin-alimlarim"
             >
               <AppIcon name="favorite" className="h-4 w-4" />
-              <span>Saved</span>
-            </Link>
-            <Link
-              className="flex items-center gap-3 px-4 py-3 text-slate-500 transition-all hover:bg-slate-800 hover:text-white"
-              href="/giris"
-            >
-              <AppIcon name="help" className="h-4 w-4" />
-              <span>Support</span>
+              <span>Biletlerim</span>
             </Link>
           </nav>
-          <div className="mt-auto">
-            <Link
-              href={
-                featuredEvent
-                  ? `/biletler?event=${featuredEvent.slug}`
-                  : "/biletler"
-              }
-              className="block w-full rounded-xl bg-linear-to-br from-[#83aeff] to-[#6aa0ff] px-4 py-3 text-center font-bold text-[#000000] shadow-[0_0_32px_rgba(131,174,255,0.08)] transition-transform active:scale-95"
-            >
-              Buy VIP Pass
-            </Link>
-          </div>
         </aside>
 
         <div className="mx-auto w-full max-w-6xl flex-1 px-6 pb-24 md:pb-12">
@@ -150,16 +109,17 @@ export default async function HomePage() {
             </div>
             <div className="relative z-10 max-w-2xl">
               <span className="mb-6 inline-block rounded-full border border-[#00fdc6]/20 bg-[#00fdc6]/10 px-3 py-1 font-['Plus_Jakarta_Sans',sans-serif] text-sm font-bold tracking-wider text-[#00fdc6]">
-                CAMPUS NIGHTLIFE
+                BAKIRCAY + KATIP CELEBI | 2000&apos;LER PARTISI
               </span>
               <h1 className="mb-4 font-['Space_Grotesk',sans-serif] text-6xl leading-[0.9] font-bold -tracking-[0.04em] text-[#f0f0fd] md:text-8xl">
-                FIND YOUR <br />{" "}
-                <span className="text-[#83aeff] italic">NEXT NIGHT</span> OUT
+                Y2K GERI DONUS <br />{" "}
+                <span className="text-[#83aeff] italic">KAMPUS EDITION</span>
               </h1>
               {featuredEvent ? (
                 <p className="mb-8 max-w-lg font-['Plus_Jakarta_Sans',sans-serif] text-[#c7ccdd]">
                   {featuredEvent.title} | {formatDate(featuredEvent.startAt)} |{" "}
-                  {featuredEvent.venue}
+                  {featuredEvent.venue} | Bakircay ve Katip Celebi ogrencilerine
+                  acik
                 </p>
               ) : null}
               <div className="flex flex-col items-center gap-4 sm:flex-row">
@@ -171,14 +131,14 @@ export default async function HomePage() {
                   }
                   className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-[#83aeff] to-[#6aa0ff] px-8 py-4 text-lg font-bold text-[#000000] transition-all hover:brightness-110 sm:w-auto"
                 >
-                  Explore Events{" "}
+                  2000&apos;ler Etkinliklerini Kesfet{" "}
                   <AppIcon name="arrow_forward" className="h-4 w-4" />
                 </Link>
                 <Link
                   className="w-full rounded-xl border border-[#464752]/15 bg-[#222532]/40 px-8 py-4 text-center text-lg font-bold text-[#f0f0fd] backdrop-blur-md transition-all hover:bg-[#282b3a] sm:w-auto"
                   href="/biletler"
                 >
-                  View Calendar
+                  Tum Programi Gor
                 </Link>
               </div>
             </div>
@@ -188,17 +148,18 @@ export default async function HomePage() {
             <div className="mb-8 flex items-end justify-between px-2">
               <div>
                 <h2 className="font-['Space_Grotesk',sans-serif] text-4xl font-bold tracking-tight text-[#f0f0fd]">
-                  Trending Events
+                  2000&apos;ler Geceleri
                 </h2>
                 <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[#aaaab7]">
-                  The hottest spots this weekend
+                  Bakircay ve Katip Celebi kampuslerinden en cok ilgi gorenler
                 </p>
               </div>
               <Link
                 className="flex items-center gap-1 font-bold text-[#83aeff] hover:underline"
                 href="/biletler"
               >
-                View All <AppIcon name="open_in_new" className="h-3.5 w-3.5" />
+                Tumunu Gor{" "}
+                <AppIcon name="open_in_new" className="h-3.5 w-3.5" />
               </Link>
             </div>
 
@@ -219,7 +180,7 @@ export default async function HomePage() {
                     />
                     {index === 0 ? (
                       <div className="absolute top-3 right-3 rounded-full bg-[#ff51fa] px-3 py-1 text-xs font-bold tracking-widest text-[#400040] uppercase">
-                        Selling Fast
+                        Hizli Tukeniyor
                       </div>
                     ) : null}
                   </div>
@@ -260,16 +221,16 @@ export default async function HomePage() {
         >
           <AppIcon name="local_activity" className="h-5 w-5" />
           <span className="mt-1 text-[10px] font-bold tracking-widest uppercase">
-            Feed
+            Etkinlik
           </span>
         </Link>
         <Link
           className="flex flex-col items-center justify-center px-6 py-2 text-slate-500 transition-transform duration-150 active:scale-90"
-          href="/"
+          href="/explore"
         >
           <AppIcon name="search" className="h-5 w-5" />
           <span className="mt-1 text-[10px] font-bold tracking-widest uppercase">
-            Search
+            Kesfet
           </span>
         </Link>
         <Link
@@ -278,7 +239,7 @@ export default async function HomePage() {
         >
           <AppIcon name="confirmation_number" className="h-5 w-5" />
           <span className="mt-1 text-[10px] font-bold tracking-widest uppercase">
-            Tickets
+            Biletlerim
           </span>
         </Link>
         <Link
@@ -287,23 +248,10 @@ export default async function HomePage() {
         >
           <AppIcon name="account_circle" className="h-5 w-5" />
           <span className="mt-1 text-[10px] font-bold tracking-widest uppercase">
-            Profile
+            Profil
           </span>
         </Link>
       </nav>
-
-      <div className="fixed right-6 bottom-24 z-40 md:right-8 md:bottom-8">
-        <Link
-          href={
-            featuredEvent
-              ? `/biletler?event=${featuredEvent.slug}`
-              : "/biletler"
-          }
-          className="flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-[#83aeff] to-[#6aa0ff] text-[#000000] shadow-[0_0_32px_rgba(131,174,255,0.2)] transition-all hover:scale-110 active:scale-90"
-        >
-          <AppIcon name="add" className="h-8 w-8" />
-        </Link>
-      </div>
     </main>
   );
 }

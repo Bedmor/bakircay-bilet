@@ -135,12 +135,15 @@ model Ticket {
     purchaseId   String
     createdAt    DateTime     @default(now())
     approvedAt   DateTime?
+    checkedInAt  DateTime?
+    checkedInBy  String?
 
     user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     purchase Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
 
     @@index([purchaseId])
     @@index([userId, status])
+    @@index([checkedInAt])
 }
 
 model Event {
