@@ -156,7 +156,7 @@ export default async function HomePage() {
               </div>
               <Link
                 className="flex items-center gap-1 font-bold text-[#83aeff] hover:underline"
-                href="/biletler"
+                href="/explore"
               >
                 Tumunu Gor{" "}
                 <AppIcon name="open_in_new" className="h-3.5 w-3.5" />
