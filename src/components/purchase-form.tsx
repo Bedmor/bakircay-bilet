@@ -22,6 +22,7 @@ type PurchaseResponse = {
 export function PurchaseForm(props: {
   defaultPhone?: string | null;
   eventSlug?: string;
+  unitPriceKurus: number;
 }) {
   const [quantity, setQuantity] = useState(1);
   const [phone, setPhone] = useState(props.defaultPhone ?? "");
@@ -36,6 +37,9 @@ export function PurchaseForm(props: {
       setPhone(props.defaultPhone);
     }
   }, [props.defaultPhone]);
+
+  const totalKurus = quantity * props.unitPriceKurus;
+  const totalPriceLabel = `TL ${(totalKurus / 100).toLocaleString("tr-TR")}`;
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -97,6 +101,20 @@ export function PurchaseForm(props: {
               className="w-full rounded-xl bg-[#11131d] px-4 py-3 text-sm text-[#f0f0fd] outline-none placeholder:text-[#737580]/50 focus:ring-2 focus:ring-[#83aeff]/50"
               placeholder="05xx xxx xx xx"
             />
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-[#464752]/20 bg-[#0c0e17] px-4 py-3">
+          <div className="flex items-center justify-between gap-3">
+            <div>
+              <p className="text-[10px] font-bold tracking-widest text-[#737580] uppercase">
+                Canli Toplam
+              </p>
+              <p className="text-xs text-[#aaaab7]">{quantity} adet bilet</p>
+            </div>
+            <p className="font-['Space_Grotesk',sans-serif] text-xl font-bold text-[#83aeff]">
+              {totalPriceLabel}
+            </p>
           </div>
         </div>
 

@@ -48,9 +48,6 @@ export default async function BiletlerPage(props: {
     redirect("/");
   }
 
-  const quantityExample = 2;
-  const subtotalKurus = selectedEvent.priceKurus * quantityExample;
-
   return (
     <main className="min-h-screen bg-[#0c0e17] text-[#f0f0fd]">
       <nav className="fixed top-0 z-50 w-full bg-slate-950/70 shadow-[0_0_20px_rgba(131,174,255,0.1)] backdrop-blur-xl">
@@ -173,24 +170,12 @@ export default async function BiletlerPage(props: {
                       {formatPrice(selectedEvent.priceKurus)}
                     </div>
                   </div>
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <div className="font-bold text-[#f0f0fd]">
-                        Ornek Toplam (2 Adet)
-                      </div>
-                      <div className="text-xs text-[#aaaab7]">
-                        Gercek tutar sipariste hesaplanir
-                      </div>
-                    </div>
-                    <div className="font-['Space_Grotesk',sans-serif] font-bold text-[#83aeff]">
-                      {formatPrice(subtotalKurus)}
-                    </div>
-                  </div>
                 </div>
 
                 <PurchaseForm
                   defaultPhone={currentUser?.phone ?? session.user.phone}
                   eventSlug={selectedEvent.slug}
+                  unitPriceKurus={selectedEvent.priceKurus}
                 />
               </div>
             </div>
