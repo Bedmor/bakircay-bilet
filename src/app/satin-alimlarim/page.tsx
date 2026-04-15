@@ -10,10 +10,7 @@ import { InitialAvatar } from "~/components/initial-avatar";
 import { UserMenu } from "~/components/user-menu";
 import { auth } from "~/server/auth";
 import { db } from "~/server/db";
-import {
-  deleteR2ObjectByUrl,
-  uploadProfileImageToR2,
-} from "~/server/lib/r2";
+import { deleteR2ObjectByUrl, uploadProfileImageToR2 } from "~/server/lib/r2";
 
 const profileSchema = z.object({
   name: z.string().trim().min(2).max(80),
