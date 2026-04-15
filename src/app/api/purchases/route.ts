@@ -7,7 +7,7 @@ import { generateTicketNumber } from "~/server/lib/ticket-number";
 import { buildWhatsappPaymentLink } from "~/server/lib/whatsapp";
 import { db } from "~/server/db";
 
-const UNIT_PRICE_KURUS = 12500;
+const UNIT_PRICE_TL = 125;
 
 const createPurchaseSchema = z.object({
   quantity: z.number().int().min(1).max(10),
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
         select: { priceKurus: true },
       });
 
-  const unitPriceKurus = event?.priceKurus ?? UNIT_PRICE_KURUS;
+  const unitPriceKurus = event?.priceKurus ?? UNIT_PRICE_TL;
   const totalKurus = unitPriceKurus * quantity;
   const ticketData = Array.from({ length: quantity }).map(() => ({
     userId: session.user.id,

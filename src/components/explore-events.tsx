@@ -19,8 +19,8 @@ type ExploreEvent = {
   priceKurus: number;
 };
 
-function formatPrice(kurus: number) {
-  return `TL ${(kurus / 100).toLocaleString("tr-TR")}`;
+function formatPrice(tl: number) {
+  return `TL ${tl.toLocaleString("tr-TR")}`;
 }
 
 function formatDate(value: string) {

@@ -10,8 +10,8 @@ import { auth } from "~/server/auth";
 import { db } from "~/server/db";
 import { getEvents } from "~/server/lib/events";
 
-function formatPrice(kurus: number) {
-  return `TL ${(kurus / 100).toLocaleString("tr-TR")}`;
+function formatPrice(tl: number) {
+  return `TL ${tl.toLocaleString("tr-TR")}`;
 }
 
 function formatDate(date: Date) {

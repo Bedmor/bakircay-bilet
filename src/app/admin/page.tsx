@@ -11,8 +11,8 @@ import { db } from "../../server/db";
 import { uploadEventImageToR2 } from "../../server/lib/r2";
 import type { Prisma } from "../../../generated/prisma";
 
-function formatPrice(kurus: number) {
-  return `TL ${(kurus / 100).toLocaleString("tr-TR")}`;
+function formatPrice(tl: number) {
+  return `TL ${tl.toLocaleString("tr-TR")}`;
 }
 
 function formatDate(date: Date) {
@@ -637,7 +637,7 @@ export default async function AdminPage(props: {
                   </label>
                   <label className="space-y-2 text-sm">
                     <span className="block text-xs font-bold tracking-widest text-[#737580] uppercase">
-                      Fiyat (kuruş)
+                      Fiyat (TL)
                     </span>
                     <input
                       name="priceKurus"

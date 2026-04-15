@@ -38,8 +38,8 @@ export function PurchaseForm(props: {
     }
   }, [props.defaultPhone]);
 
-  const totalKurus = quantity * props.unitPriceKurus;
-  const totalPriceLabel = `TL ${(totalKurus / 100).toLocaleString("tr-TR")}`;
+  const totalTl = quantity * props.unitPriceKurus;
+  const totalPriceLabel = `TL ${totalTl.toLocaleString("tr-TR")}`;
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

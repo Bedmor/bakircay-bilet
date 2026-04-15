@@ -9,7 +9,7 @@ export const buildWhatsappPaymentLink = (params: {
   ticketNumbers: string[];
 }) => {
   const paymentNumber = env.WHATSAPP_PAYMENT_NUMBER ?? DEFAULT_PAYMENT_NUMBER;
-  const totalTl = (params.totalKurus / 100).toFixed(2);
+  const totalTl = params.totalKurus.toFixed(2);
   const ticketList = params.ticketNumbers.join(", ");
 
   const message = [
