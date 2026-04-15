@@ -56,14 +56,18 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String     @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
+  phone         String?    @unique
+  role          UserRole   @default(USER)
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
+  purchases     Purchase[]
+  tickets       Ticket[]
 }
 
 model VerificationToken {
@@ -72,4 +76,87 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum PurchaseStatus {
+  PENDING_PAYMENT
+  PENDING_APPROVAL
+  APPROVED
+  REJECTED
+}
+
+enum TicketStatus {
+  PENDING_APPROVAL
+  APPROVED
+  CANCELLED
+}
+
+model PhoneOtp {
+  id        String   @id @default(cuid())
+  phone     String   @unique
+  codeHash  String
+  attempts  Int      @default(0)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Purchase {
+  id             String         @id @default(cuid())
+  userId         String
+  quantity       Int            @default(1)
+  unitPriceKurus Int
+  totalKurus     Int
+  buyerEmail     String
+  buyerPhone     String
+  whatsappLink   String
+  status         PurchaseStatus @default(PENDING_PAYMENT)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  approvedAt     DateTime?
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tickets Ticket[]
+
+  @@index([userId, status])
+  @@index([status])
+}
+
+model Ticket {
+  id           String       @id @default(cuid())
+  ticketNumber String       @unique
+  status       TicketStatus @default(PENDING_APPROVAL)
+  userId       String
+  purchaseId   String
+  createdAt    DateTime     @default(now())
+  approvedAt   DateTime?
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  purchase Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+
+  @@index([purchaseId])
+  @@index([userId, status])
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String
+  venue       String
+  city        String
+  startAt     DateTime
+  imageUrl    String
+  priceKurus  Int
+  category    String
+  isFeatured  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([startAt])
 }
